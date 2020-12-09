@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="css/tic-tac-toe.css" />
+    <meta charset="UTF-8" />
+</head>
+
+<body>
+    <div id="game">
+        <h1>Tic Tac Toe Game</h1>
+        <div id="choosing-character">
+            <h3>Choose your character</h3>
+            <fieldset >
+                <input type="radio" name="player-choice" id="player-choice-1" value="X" />
+                <label class="character" for="player-choice-1">X</label>
+                <input type="radio" name="player-choice" id="player-choice-2" value="O" />
+                <label class="character" for="player-choice-2">O</label>
+            </fieldset>
+        </div>
+        <div id="board">
+            <button class="cell">
+                <span class="cell-content"></span>
+            </button>
+            <button class="cell">
+                <span class="cell-content"></span>
+            </button>
+            <button class="cell">
+                <span class="cell-content"></span>
+            </button>
+            <button class="cell">
+                <span class="cell-content"></span>
+            </button>
+            <button class="cell">
+                <span class="cell-content"></span>
+            </button>
+            <button class="cell">
+                <span class="cell-content"></span>
+            </button>
+            <button class="cell">
+                <span class="cell-content"></span>
+            </button>
+            <button class="cell">
+                <span class="cell-content"></span>
+            </button>
+            <button class="cell">
+                <span class="cell-content"></span>
+            </button>
+        </div>
+    </div>
+
+    <div id="modal-overlay">
+        <div id="game-result-modal">
+            <div id="result-container">
+                <div id="winner-container">
+                    <span id="winner-span"></span>
+                </div>
+            </div>
+        </div>
+        <div id="new-game-container">
+            <div class="new-game-buttons">
+                <button id="new-game-button">Start New Game</button>
+            </div>
+            <div class="new-game-buttons">
+                <button id="exit-game-button">Exit Game</buttom>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/tic-tac-toe.js"></script>
+    <noscript>Enable JavaScript to run the game</noscript>
+</body>
+
+</html>
