@@ -12,42 +12,43 @@
         <h1>Tic Tac Toe Game</h1>
         <div id="choosing-character">
             <h3>Choose Your Shape</h3>
-            <fieldset>
-                <input type="radio" name="player-choice" id="player-choice-1" value="X" />
-                <label class="character" for="player-choice-1">X</label>
-                <input type="radio" name="player-choice" id="player-choice-2" value="O" />
-                <label class="character" for="player-choice-2">O</label>
-            </fieldset>
+            <div id="field">
+                <a class="character" id="player-choice-1" tabindex="-1">X</a>
+                <a class="character" id="player-choice-2" tabindex="-1">O</a>
+            </div>
         </div>
         <div id="board">
-            <button class="cell" id ="cell0">
+            <button class="cell" id="cell0">
                 <span class="cell-content"></span>
             </button>
-            <button class="cell" id ="cell1">
+            <button class="cell" id="cell1">
                 <span class="cell-content"></span>
             </button>
-            <button class="cell" id ="cell2">
+            <button class="cell" id="cell2">
                 <span class="cell-content"></span>
             </button>
-            <button class="cell" id ="cell3">
+            <button class="cell" id="cell3">
                 <span class="cell-content"></span>
             </button>
-            <button class="cell" id ="cell4">
+            <button class="cell" id="cell4">
                 <span class="cell-content"></span>
             </button>
-            <button class="cell" id ="cell5">
+            <button class="cell" id="cell5">
                 <span class="cell-content"></span>
             </button>
-            <button class="cell" id ="cell6">
+            <button class="cell" id="cell6">
                 <span class="cell-content"></span>
             </button>
-            <button class="cell" id ="cell7">
+            <button class="cell" id="cell7">
                 <span class="cell-content"></span>
             </button>
-            <button class="cell" id ="cell8">
+            <button class="cell" id="cell8">
                 <span class="cell-content"></span>
             </button>
         </div>
+        <script type="text/javascript" src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+        <!-- <script src="js/ads.js"></script> -->
+        <div id="ad-container"></div>
     </div>
     <div id="modal-overlay">
         <div id="game-result-modal">
@@ -66,21 +67,7 @@
             </div>
         </div>
     </div>
-    <div id="page-content">
-        <div id="video-container">
-            <video id="video-element">
-                <source src="https://storage.googleapis.com/interactive-media-ads/media/android.mp4">
-                </source>
-                <source src="https://storage.googleapis.com/interactive-media-ads/media/android.webm">
-                </source>
-            </video>
-            <div id="ad-container"></div>
-        </div>
-        <!-- <script type="text/javascript" src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script> -->
-        <script src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
-        <!-- <script src="https://maps.googleapis.com/maps/api/js?key=API_KEY_HERE"></script> -->
-        <script src="js/ads.js"></script>
-    </div>
+    
     <script src="js/tic-tac-toe.js"></script>
     <noscript>Enable JavaScript to run the game</noscript>
 </body>

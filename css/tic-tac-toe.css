@@ -35,7 +35,6 @@
 
 html, body {
     height: 100%;
-    /* display: grid; */
 }
 
 body {
@@ -68,22 +67,12 @@ h1 {
 }
 h3 {
     color: var(--secondary-gradient);
-    /* text-align: left; */
     margin-bottom: 2vmin;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    /* margin-bottom: 2vmin; */
     font-size: 2.5vmin;
 }
 
-.element:focus-visible {
-    background-color: pink; /* Something to get the user's attention */
-    border-color: black;
-    border-style: bold;
-  }
 
-.check {
-    display: inline-block;
-}
 .character {
     cursor: pointer;
     text-align: center;
@@ -91,22 +80,24 @@ h3 {
     text-align: center;
 }
 
-.character:focus{
-    color: green;
-    border-color: rgb(0, 0, 0) !important;
-    border-style: bold;
-    border-width: 3vmin;
-    border-radius: 20vmax;
+#field {
+    display: block;
+    margin: 15%;
+    font-size: 5vmin;
+}
+#player-choice-1:focus{
+    border-color: rgb(0, 0, 0);
+    border-width: 0.5vmin;
+    border-radius: 1vmin;
 }
 
-#player-choice-1:focus {
-    color: green;
-    border-color: rgb(0, 0, 0) !important;
-    border-style: bold;
-    border-width: 3vmin;
-    border-radius: 20vmax;
+#player-choice-2:focus{
+
+    border-color: rgb(0, 0, 0);
+    border-width: 0.5vmin;
+    border-radius: 1vmin;
 }
- 
+
 #game{
     position: relative;
     opacity: 0;
@@ -130,20 +121,12 @@ h3 {
     left: 35%;
     width: 50%;
     height: 20%;
-    /* justify-content: center; */
     display: grid;
-    /* text-align: center; */
-    /* display:inline-block; */
     color: var(--secondary-gradient);
     margin: 2vmin;
-    /* transform: translate(100%, 100%); */
 }
 
 #board {
-    /* opacity: 0; */
-    /* display: block; */
-    /* position: absolute;
-    top: 0; */
     display: grid;
     visibility: hidden;
     grid-template-columns: repeat(3,25vmin);
@@ -153,24 +136,8 @@ h3 {
     transition: cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
-#player-choice-1 {
-    color: var(--primary-color);
-    font-size: 4vmin;
-    font-weight: bold;
-    cursor: pointer;
-}
-#player-choice-2 {
-    color: var(--primary-color);
-    font-size: 4vmin;
-    font-weight: bold;
-}
-
 
 .cell{
-    /* display: flex;
-    justify-content: center;
-    align-content: center;
-    text-align: center; */
     font-size: 10vmin;
     font-weight: bold;
     color: var(--accent-color);
@@ -183,7 +150,6 @@ h3 {
 
 .cell:active, .cell:hover{
     cursor: pointer;
-    /* color: var(--content-background-color); */
     background: var(--primary-highlight-gradient);
 }
 
@@ -193,13 +159,6 @@ h3 {
     border-width: 0.5vmin;
     border-radius: 3vmin;
 }
-
-/* .button:focus{
-    border-color: rgb(255, 255, 255);
-    border-style: bold;
-    border-width: 0.5vmin;
-    border-radius: 2vmin;
-} */
 
 .cell-content{
     overflow: hidden;
@@ -217,7 +176,6 @@ h3 {
 }
 
 #modal-overlay {
-    /* display: grid; */
     display: grid;
     justify-content: center;
     position: absolute;
@@ -239,8 +197,6 @@ h3 {
 }
 
 #result-container {
-    /* position: relative; */
-    /* padding-bottom: 80; */
     display: flex;
     align-items: flex-end;
 }
@@ -248,8 +204,6 @@ h3 {
 
 #winner-container {
     position: fixed;
-    /* margin-bottom: 45vmin;
-    margin-right: 70vmax; */
     opacity: 0;
     top: 1vmin;
     width: 40vmin;
@@ -314,34 +268,11 @@ cursor: pointer;
     background: var(--primary-highlight-gradient);
 }
 
-#page-content {
-    position: relative;
-    /* this element's width controls the effective height */
-    /* of the video container's padding-bottom */
-    max-width: 640px;
-    margin: 10px auto;
-  }
-
-  
-  #video-container {
-    position: relative;
-    /* forces the container to match a 16x9 aspect ratio */
-    /* replace with 75% for a 4:3 aspect ratio, if needed */
-    padding-bottom: 56.25%;
-  }
-  
-  #video-element {
-    /* forces the contents to fill the container */
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
 
 #ad-container {
     position: absolute;
-    top: 0;
+    width: 30%;
+    height: 12%;
     left: 0;
-    width: 100%;
+    top: 0;
   }

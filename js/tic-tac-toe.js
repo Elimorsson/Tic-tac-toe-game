@@ -30,6 +30,7 @@ var numberOfTurnsLeft = 9;
 var userShapeChosen;
 var computerShape;
 var computerCells = [];
+var cpuTurn = false;
 
 const cells = document.querySelectorAll(`.${classNames.cell}`);
 const modalOverlay = document.querySelector('#modal-overlay');
@@ -41,54 +42,139 @@ const newGameButton = document.querySelector('#new-game-button');
 const exitGameButton = document.querySelector('#exit-game-button');
 const chooses = document.querySelectorAll('.character');
 const choosingBox = document.querySelector('#choosing-character');
-const myWindow = window;
+const xOption = document.querySelector('#player-choice-1');
+const yOption = document.querySelector('#player-choice-2');
 
-newGameButton.addEventListener('click', () => startGame());
+
+window.onload = function () {
+    newGameButton.focus();
+};
+
+newGameButton.addEventListener('click', (event) => {
+    loadAds(event);
+    startGame();
+});
 exitGameButton.addEventListener('click', () => { window.location.replace("https://en.wikipedia.org/wiki/Tic-tac-toe"); })
 chooses.forEach((choose, index) => {
     choose.addEventListener('click', () => {
-        userShapeChosen = index === 0 ? user.x : index === 1 ? user.o : console.log('there is a problem on choosing shape');
-        computerShape = userShapeChosen === user.x ? user.o : user.x;
-        startBoard();
+        shapeChoosen(index);
     })
 });
 
 
+xOption.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        shapeChoosen(0);
+    }
+});
+yOption.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        shapeChoosen(1);
+    }
+});
 
 
-const startGame = () => {
-    cellValues = ['', '', '', '', '', '', '', '', ''];
-    winningPlayer = '';
-    winningCombination = [];
-    numberOfTurnsLeft = 9;
-    firstTurn = true;
-    computerCells = [];
+document.addEventListener('keyup', (e) => {
+    if (e.code === "ArrowRight") {
+        if (document.activeElement.id === newGameButton.id) {
+            exitGameButton.focus();
+        }
+        if (document.activeElement.id === xOption.id) {
+            yOption.focus();
+        }
+        if (document.activeElement.id === cells[0].id ||
+            document.activeElement.id === cells[1].id ||
+            document.activeElement.id === cells[3].id ||
+            document.activeElement.id === cells[4].id ||
+            document.activeElement.id === cells[6].id ||
+            document.activeElement.id === cells[7].id) {
+            cells[parseInt(document.activeElement.id.split("").pop()) + 1].focus();
+        }
+    }
+    if (e.code === "ArrowLeft") {
+        if (document.activeElement.id === exitGameButton.id) {
+            newGameButton.focus();
+        }
+        if (document.activeElement.id === yOption.id) {
+            xOption.focus();
+        }
+        if (document.activeElement.id === cells[1].id ||
+            document.activeElement.id === cells[2].id ||
+            document.activeElement.id === cells[4].id ||
+            document.activeElement.id === cells[5].id ||
+            document.activeElement.id === cells[7].id ||
+            document.activeElement.id === cells[8].id) {
+            cells[parseInt(document.activeElement.id.split("").pop()) - 1].focus();
+        }
+    }
+    if (e.code === "ArrowUp") {
+        if (document.activeElement.id === cells[3].id ||
+            document.activeElement.id === cells[4].id ||
+            document.activeElement.id === cells[5].id ||
+            document.activeElement.id === cells[6].id ||
+            document.activeElement.id === cells[7].id ||
+            document.activeElement.id === cells[8].id) {
+            cells[parseInt(document.activeElement.id.split("").pop()) - 3].focus();
+        }
+    }
+    if (e.code === "ArrowDown") {
+        if (document.activeElement.id === cells[0].id ||
+            document.activeElement.id === cells[1].id ||
+            document.activeElement.id === cells[2].id ||
+            document.activeElement.id === cells[3].id ||
+            document.activeElement.id === cells[4].id ||
+            document.activeElement.id === cells[5].id) {
+            cells[parseInt(document.activeElement.id.split("").pop()) + 3].focus();
+        }
+    }
+})
 
-    modalOverlay.style.display = 'none';
-    winnerContainer.style.opacity = '100%';
-    game.style.opacity = '100%';
-    board.style.visibility = "hidden";
-    choosingBox.style.opacity = '100%';
-    choosingBox.style.visibility = "visible";
-
-
-    cells.forEach((c, i) => {
-        const cellContent = c.querySelector(`.${classNames.cellContent}`);
-        cellContent.innerHTML = cellValues[i];
-        cellContent.classList.remove(classNames.populated);
-        c.classList.remove(classNames.winner);
-    });
-
-}
-
-window.onload =  function() {
-    document.getElementById("new-game-button1").focus;
-};
 
 window.addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
-      console.log("entered " + document.activeElement.id);
-    }});
+        // console.log(document.activeElement.id + " entered ");
+    }
+});
+
+
+
+const startGame = () => {
+    modalOverlay.style.display = 'none';
+    game.style.opacity = '100%';
+    board.style.visibility = "hidden";
+    choosingBox.style.opacity = 0;
+    choosingBox.style.visibility = "hidden";
+    setTimeout(() => {
+        cellValues = ['', '', '', '', '', '', '', '', ''];
+        winningPlayer = '';
+        winningCombination = [];
+        numberOfTurnsLeft = 9;
+        firstTurn = true;
+        computerCells = [];
+        cpuTurn = false;
+        cells.forEach((c, i) => {
+            const cellContent = c.querySelector(`.${classNames.cellContent}`);
+            cellContent.innerHTML = cellValues[i];
+            cellContent.classList.remove(classNames.populated);
+            c.classList.remove(classNames.winner);
+        });
+        adContainer.style.width = '30%';
+        adContainer.style.height = '12%';
+        winnerContainer.style.opacity = '100%';
+        choosingBox.style.opacity = '100%';
+        choosingBox.style.visibility = "visible";
+        xOption.focus();
+    }, 10500);
+
+
+}
+
+
+const shapeChoosen = (index) => {
+    userShapeChosen = index === 0 ? user.x : index === 1 ? user.o : console.log('there is a problem on choosing shape');
+    computerShape = userShapeChosen === user.x ? user.o : user.x;
+    startBoard();
+}
 
 const startBoard = () => {
     game.style.opacity = '100%';
@@ -97,12 +183,12 @@ const startBoard = () => {
     choosingBox.style.visibility = "hidden";
     board.style.visibility = "visible";
     window.document.getElementById("cell4").focus();
-
 }
 
 
 cells.forEach((c, i) => {
     c.addEventListener('click', () => {
+        if (cpuTurn) return;
         if (!cellValues[i]) {
             cellValues[i] = userShapeChosen;
             numberOfTurnsLeft--;
@@ -116,8 +202,9 @@ cells.forEach((c, i) => {
                 showModal();
             }
             else if (numberOfTurnsLeft > 0) {
-                setTimeout(computerMove,600);
+                setTimeout(computerMove, 800);
             }
+            cpuTurn = true;
         }
     });
 });
@@ -133,7 +220,7 @@ const computerMove = () => {
             }
         }
         chosen = generateFirstCell(userChoose);
-        while (chosen === null){
+        while (chosen === null) {
             chosen = generateFirstCell(userChoose);
         }
         firstTurn = false;
@@ -165,6 +252,7 @@ const computerMove = () => {
             cellContent.classList.add(classNames.populated);
         }
     })
+    cpuTurn = false;
 }
 
 const generateFirstCell = (userChoose) => {
@@ -236,7 +324,9 @@ const calculateWinner = (chosenIndex) => {
 const showModal = () => {
     winnerDetails.innerHTML = winningPlayer == userShapeChosen ? `You Are The Winner!` : winningPlayer === computerShape ? `You Lost` : `Draw`;
     modalOverlay.style.display = 'grid';
-    game.style.opacity = '0.3'
+    game.style.opacity = '0.3';
+    newGameButton.focus();
+    initializeIMA();
 };
 
 const highlightWinningCells = () => {
@@ -245,3 +335,112 @@ const highlightWinningCells = () => {
     cells[winningCombination[2]].classList.add(classNames.winner)
 }
 
+
+
+// ------------------------------advertisment area---------------------------------
+var gameElement;
+var adsLoaded = false;
+var adContainer;
+var adDisplayContainer;
+var adsLoader;
+var adsManager;
+
+
+// On window load, attach an event to the play button click
+// that triggers playback on the video element
+window.addEventListener('load', function (event) {
+    gameElement = document.getElementById('game');
+
+    initializeIMA();
+});
+window.addEventListener('resize', function (event) {
+    console.log("window resized");
+    if (adsManager) {
+        var width = gameElement.width;
+        var height = gameElement.height;
+        adsManager.resize(width, height, google.ima.ViewMode.NORMAL);
+    }
+});
+
+function initializeIMA() {
+    console.log("initializing IMA");
+    adContainer = document.getElementById('ad-container');
+    adDisplayContainer = new google.ima.AdDisplayContainer(adContainer, gameElement);
+    adsLoader = new google.ima.AdsLoader(adDisplayContainer)
+    adsLoader.addEventListener(
+        google.ima.AdsManagerLoadedEvent.Type.ADS_MANAGER_LOADED,
+        onAdsManagerLoaded,
+        false);
+    adsLoader.addEventListener(
+        google.ima.AdErrorEvent.Type.AD_ERROR,
+        onAdError,
+        false);
+    adContainer.style.width = '100%';
+    adContainer.style.height = '100%';
+
+    var adsRequest = new google.ima.AdsRequest();
+    adsRequest.adTagUrl = 'https://pubads.g.doubleclick.net/gampad/ads?' +
+        'sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&' +
+        'impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&' +
+        'cust_params=deployment%3Ddevsite%26sample_ct%3Dlinear&correlator=';
+
+    // Specify the linear and nonlinear slot sizes. This helps the SDK to
+    // select the correct creative if multiple are returned.
+
+    adsRequest.linearAdSlotWidth = window.width;
+    adsRequest.linearAdSlotHeight = window.height;
+    adsRequest.nonLinearAdSlotWidth = window.width;
+    adsRequest.nonLinearAdSlotHeight = window.height;
+
+
+    // Pass the request to the adsLoader to request ads
+    adsLoader.requestAds(adsRequest);
+}
+
+function onContentPauseRequested() {
+    contentElement.removeEventListener('ended', contentEndedListener);
+}
+function loadAds(event) {
+    // Prevent this function from running on if there are already ads loaded
+    if (adsLoaded) {
+        return;
+    }
+    adsLoaded = true;
+
+    // Prevent triggering immediate playback when ads are loading
+    event.preventDefault();
+
+    console.log("loading ads");
+    // // Initialize the container. Must be done via a user action on mobile devices.
+    adDisplayContainer.initialize();
+
+    var width = window.width;
+    var height = window.height;
+    try {
+        adsManager.init(width, height, google.ima.ViewMode.NORMAL);
+        if (this.adsManager) {
+            this.adsManager.resize(-1, -1, google.ima.ViewMode.FULLSCREEN);
+        }
+        adsManager.start();
+    } catch (adError) {
+        // Play the video without ads, if an error occurs
+        console.log("AdsManager could not be started " + adError);
+    }
+    adsLoaded = false;
+}
+function onAdsManagerLoaded(adsManagerLoadedEvent) {
+    // Instantiate the AdsManager from the adsLoader response and pass it the video element
+    adsManager = adsManagerLoadedEvent.getAdsManager(
+        gameElement);
+    adsManager.addEventListener(
+        google.ima.AdErrorEvent.Type.AD_ERROR,
+        onAdError);
+}
+
+function onAdError(adErrorEvent) {
+    // Handle the error logging.
+    console.log(adErrorEvent.getError());
+    if (adsManager) {
+        adsManager.destroy();
+    }
+}
