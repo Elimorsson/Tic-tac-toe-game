@@ -166,7 +166,7 @@ const startGame = () => {
         choosingBox.style.opacity = '100%';
         choosingBox.style.visibility = "visible";
         xOption.focus();
-    }, 100);
+    }, 11000);
 }
 
 
