@@ -145,6 +145,7 @@ const startGame = () => {
     board.style.visibility = "hidden";
     choosingBox.style.opacity = 0;
     choosingBox.style.visibility = "hidden";
+    turnShown.innerHTML = '';
     setTimeout(() => {
         cellValues = ['', '', '', '', '', '', '', '', ''];
         winningPlayer = '';
@@ -165,7 +166,7 @@ const startGame = () => {
         choosingBox.style.opacity = '100%';
         choosingBox.style.visibility = "visible";
         xOption.focus();
-    }, 11000);
+    }, 100);
 }
 
 
@@ -328,7 +329,6 @@ const showModal = () => {
     winnerDetails.innerHTML = winningPlayer == userShapeChosen ? `You Are The Winner!` : winningPlayer === computerShape ? `You Lost` : `Draw`;
     modalOverlay.style.display = 'grid';
     game.style.opacity = '0.3';
-    turnShown.innerHTML = ""
     newGameButton.focus();
     initializeIMA();
 };
