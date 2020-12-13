@@ -72,6 +72,11 @@ h3 {
     font-size: 2.5vmin;
 }
 
+#turn-shown {
+    text-align: center;
+    color: brown;
+    font-family: "Lobster", serif;
+}
 
 .character {
     cursor: pointer;

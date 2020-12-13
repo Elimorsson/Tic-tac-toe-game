@@ -44,6 +44,7 @@ const chooses = document.querySelectorAll('.character');
 const choosingBox = document.querySelector('#choosing-character');
 const xOption = document.querySelector('#player-choice-1');
 const yOption = document.querySelector('#player-choice-2');
+const turnShown = document.querySelector('#turn-shown');
 
 
 window.onload = function () {
@@ -164,9 +165,7 @@ const startGame = () => {
         choosingBox.style.opacity = '100%';
         choosingBox.style.visibility = "visible";
         xOption.focus();
-    }, 10500);
-
-
+    }, 11000);
 }
 
 
@@ -182,6 +181,8 @@ const startBoard = () => {
     choosingBox.style.opacity = 0;
     choosingBox.style.visibility = "hidden";
     board.style.visibility = "visible";
+    turnShown.innerHTML = userShapeChosen + " Turn";
+    
     window.document.getElementById("cell4").focus();
 }
 
@@ -202,6 +203,7 @@ cells.forEach((c, i) => {
                 showModal();
             }
             else if (numberOfTurnsLeft > 0) {
+                turnShown.innerHTML = computerShape + " Turn";
                 setTimeout(computerMove, 800);
             }
             cpuTurn = true;
@@ -245,6 +247,7 @@ const computerMove = () => {
         }
         showModal();
     }
+    turnShown.innerHTML = userShapeChosen + " Turn";
     cells.forEach((c, i) => {
         if (i === chosen) {
             const cellContent = c.querySelector(`.${classNames.cellContent}`);
@@ -325,6 +328,7 @@ const showModal = () => {
     winnerDetails.innerHTML = winningPlayer == userShapeChosen ? `You Are The Winner!` : winningPlayer === computerShape ? `You Lost` : `Draw`;
     modalOverlay.style.display = 'grid';
     game.style.opacity = '0.3';
+    turnShown.innerHTML = ""
     newGameButton.focus();
     initializeIMA();
 };
